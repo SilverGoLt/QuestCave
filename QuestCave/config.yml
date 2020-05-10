@@ -1,0 +1,5 @@
+messages:
+  playersOnly: "&4Only players can use this command!"
+  noPermission: "&4You dont have permission to use this command!"
+  playerAlreadyHasQuest: "&4You already have an active quest! to cancel your quest type /quest cancel"
+  noAvailableQuests: "&4There is no available quests!"

@@ -1,6 +1,12 @@
-main: com.questcave.code
+main: com.questcave.code.Main
 name: QuestCave
 version: 1.0
 description: QuestCave is a advanced quest plugin with a custom mob system, which allows users to select from easy to hard quests to complete.
 api-version: 1.15
 authors: [SilverGo,ChickenStyle]
+commands:
+  addquest:
+    description: Used to add quests.
+    
+  quest:
+    description: Used to look at the quest.

@@ -1,38 +1,41 @@
 package com.questcave.code.Goals;
 
-import org.bukkit.entity.Entity;
-
+import com.questcave.code.Utils;
 import com.questcave.code.Enums.Difficulty;
 import com.questcave.code.Enums.GoalType;
 
 public class KillGoal extends Goal {
 	
-	private Entity goalTarget;
-	private int goalKillsAmount;
+	private String target;
 	private int killsAmount;
+	private int killed;
 	
-	public KillGoal(Difficulty goalDifficulty,int goalKillsAmount,Entity goalTarget) {
+	public KillGoal(Difficulty goalDifficulty,int killsAmount,String target) {
 		super(GoalType.KILL, goalDifficulty);
-		this.goalKillsAmount = goalKillsAmount;
-		this.goalTarget = goalTarget;
-		this.killsAmount = 0;
+		this.killsAmount = killsAmount;
+		this.target = target;
+		this.killed = 0;
 	}
 
-	public int getGoalKillAmount() {
-		return goalKillsAmount;
+	public int getKillGoal() {
+		return killsAmount;
 	}
 
-	public Entity getGoalTarget() {
-		return goalTarget;
+	public String getTarget() {
+		return target;
 	}
 	
-	public int getKillsAmount() {
-		return killsAmount;
+	public int getKilledAmount() {
+		return killed;
 	}
 	
 	public void addKill() {
-		killsAmount = killsAmount + 1;
-		
+		killed = killed + 1;
+	}
+	
+	@Override
+	public String getGoalMessage() {
+		return Utils.Color("&7You have to kill &6" + killsAmount + " " + target + "!");
 	}
 
 }

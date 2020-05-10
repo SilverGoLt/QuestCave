@@ -13,23 +13,32 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.questcave.code.Commands.AddQuestCommand;
+import com.questcave.code.Commands.QuestCommand;
+import com.questcave.code.Configs.Easy;
+import com.questcave.code.Configs.Hard;
+import com.questcave.code.Configs.Medium;
+import com.questcave.code.Events.GUIClickEvent;
 
 public class Main extends JavaPlugin{
-	HashMap<UUID,Quest> takenQuests = new HashMap<UUID,Quest>();
-	
-	
+	public static HashMap<UUID,Quest> takenQuests = new HashMap<UUID,Quest>();
 	@Override
 	public void onEnable() {
-		
-		
-		
 		// Default Config
 		this.getConfig().options().copyDefaults();
 		saveDefaultConfig();
+		
+		//Custom Configs
+		new Easy(this);
+		new Medium(this);
+		new Hard(this);
+		
+		//Loading hashmap
 		try {
 			Gson gson = new Gson();
 			Reader reader = Files.newBufferedReader(Paths.get(getDataFolder() + "/PlayersQuest.json"));
@@ -40,11 +49,20 @@ public class Main extends JavaPlugin{
 		} catch (IOException e) {
 			takenQuests = new HashMap<>();
 		}
+		
+		//Commands
+		getCommand("addquest").setExecutor(new AddQuestCommand());
+		getCommand("quest").setExecutor(new QuestCommand());
+		
+		//Events
+		getServer().getPluginManager().registerEvents(new GUIClickEvent(), this);
+		
+		getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Quest plugin has been enabled!");
 	}
 	
 	
 	@Override
-	public void onDisable() {
+	public void onDisable(){
 		//Saving hashmap
 		try {
 			Writer writer = new FileWriter(getDataFolder() + "/PlayersQuest.json");

@@ -14,11 +14,11 @@ public class Goal {
 		this.finished = false;
 	}
 
-	public GoalType getGoalType() {
+	public GoalType getType() {
 		return goalType;
 	}
 	
-	public Difficulty getGoalDifficulty() {
+	public Difficulty getDifficulty() {
 		return goalDifficulty;
 	}
 	
@@ -29,6 +29,12 @@ public class Goal {
 	public void setFinished(boolean state) {
 		finished = state;
 	}
+	
+	public String getGoalMessage() {
+		return "No Message";
+	}
+	
+	
 	
 	
 }
